@@ -50,7 +50,7 @@ Now we will check consumer groups with kafka-consumer-groups.
 
 We can ingnore *KMOffsetCache-ubuntus1* record. It is a CMAK (former Kafka Manager) artifact. Apart of it our group list is empty.
 
-Let us read our records with kafka-console-consumer. Pay attantion on the *--from-beginning* option.
+Let us read our records with kafka-console-consumer. Pay attantion to the *--from-beginning* option.
 
     ~/kafka/current/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic T2 --group G2 --from-beginning
     First Record
