@@ -7,7 +7,7 @@ Where to get [CMAK](https://github.com/yahoo/CMAK)
 Let us create a topic T2.
 
     ~/kafka/current/bin/kafka-topics --bootstrap-server localhost:9092 --create --topic T2 --partitions 3
- Let us polulate it with fore records.
+ Let us polulate it with 4 records.
  
      ~/kafka/current/bin/kafka-console-producer --broker-list localhost:9092 --topic T2 --property  "parse.key=true" --property "key.separator=:"
     >one:First Record
@@ -89,24 +89,24 @@ If we try to rerun our consumer even with the **--from-beginning** option but *u
 
     alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic T2 --group G2 --from-beginning
 
-We can manually adjust an offset using *--reset-offsets* option. Since it is a danager opearation we have two modes aka two options: *--dry-run* to check what the outcome would be (below) and *--execute* to perform a real action.
+We can manually adjust an offset using *--reset-offsets* option. Since it is a danager operation we have two modes aka two options: *--dry-run* to check what the outcome would be (below) and *--execute* to perform a real action.
 
-Let us adjust our offsets on the partion 1 (T2:1) where we have two records with the keys *three* & *fore*. First let us have a look:
+Let us adjust our offsets on the partion 1 (T2:1) where we have two records with the keys *three* & *fore*. First let us have a look with --dry-run:
 
     alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-consumer-groups --bootstrap-server localhost:9092 --group G2 --reset-offsets --topic T2:1 --to-offset 1 --dry-run
 
     GROUP                          TOPIC                          PARTITION  NEW-OFFSET     
     G2                             T2                             1          1              
 
-And then do it.
+And then do it with --execute.
 
     alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-consumer-groups --bootstrap-server localhost:9092 --group G2 --reset-offsets --topic T2:1 --to-offset 1 --execute
 
     GROUP                          TOPIC                          PARTITION  NEW-OFFSET     
     G2                             T2                             1          1              
 
-If we run our consumer again
+We run our consumer again
 
     alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic T2 --group G2 --from-beginning
     Forth Record
-As expected we got the last record (fore:Forth Record)
+and as expected we got the last record. The key of that recod is *fore*, the value is *Forth Record*.
