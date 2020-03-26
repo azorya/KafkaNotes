@@ -14,7 +14,7 @@ Let us create a topic T2.
     >two:Second Record
     >three:Third One
     >fore:Forth Record 
- Let us have a look directly at the kafka log files.
+ Let us have a look directly at the kafka log files with kafka-dump-log.
  
     alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-dump-log --deep-iteration --files ~/kafka_data/kafka/T2-0/00000000000000000000.log --print-data-log
     Dumping /home/alex/kafka_data/kafka/T2-0/00000000000000000000.log
@@ -43,7 +43,70 @@ one  | 2 (T2-2)
 two  | 0 (T2-0)
 three, fore | 1 (T2-1)
 
-Let us read them.
+Now we will check consumer groups with kafka-consumer-groups.
 
+    alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-consumer-groups --bootstrap-server localhost:9092 --list
+    KMOffsetCache-ubuntus1
 
- 
+We can ingnore *KMOffsetCache-ubuntus1* record. It is a CMAK (former Kafka Manager) artifact. Apart of it our group list is empty.
+
+Let us read our records with kafka-console-consumer. Pay attantion on the *--from-beginning* option.
+
+    ~/kafka/current/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic T2 --group G2 --from-beginning
+    First Record
+    Third One
+    Forth Record
+    Second Record
+
+As expected we got all fore records. *Without stopping* our consumer let us look at the group list.
+      
+    alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-consumer-groups --bootstrap-server localhost:9092 --list
+    KMOffsetCache-ubuntus1
+    G2
+We have a new group *G2*. Let us examine it:
+
+    alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-consumer-groups --bootstrap-server localhost:9092 --group G2 --describe
+
+    GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                        HOST            CLIENT-ID
+    G2              T2              0          1               1               0               consumer-G2-1-80d4cbcf-4347-49f3-9a06-2f447ea466f7 /127.0.0.1      consumer-G2-1
+    G2              T2              1          2               2               0               consumer-G2-1-80d4cbcf-4347-49f3-9a06-2f447ea466f7 /127.0.0.1      consumer-G2-1
+    G2              T2              2          1               1               0               consumer-G2-1-80d4cbcf-4347-49f3-9a06-2f447ea466f7 /127.0.0.1      consumer-G2-1
+
+Now let us stop our consumer and look at our group once again.
+
+    alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-consumer-groups --bootstrap-server localhost:9092 --group G2 --describe
+
+    Consumer group 'G2' has no active members.
+
+    GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+    G2              T2              2          1               1               0               -               -               -
+    G2              T2              1          2               2               0               -               -               -
+    G2              T2              0          1               1               0               -               -               -
+
+As we can see when there are no active readers *CONSUMER-ID*, *HOST*, and *CLIENT-ID* collumns are empty.
+
+If we try to rerun our consumer even with the **--from-beginning** option but *using the same group name G2*, it will not read any messages, because for that group our *LAG*s are 0 on all three partitions. (We had read everything)
+
+    alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic T2 --group G2 --from-beginning
+
+We can manually adjust an offset using *--reset-offsets* option. Since it is a danager opearation we have two modes aka two options: *--dry-run* to check what the outcome would be (below) and *--execute* to perform a real action.
+
+Let us adjust our offsets on the partion 1 (T2:1) where we have two records with the keys *three* & *fore*. First let us have a look:
+
+    alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-consumer-groups --bootstrap-server localhost:9092 --group G2 --reset-offsets --topic T2:1 --to-offset 1 --dry-run
+
+    GROUP                          TOPIC                          PARTITION  NEW-OFFSET     
+    G2                             T2                             1          1              
+
+And then do it.
+
+    alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-consumer-groups --bootstrap-server localhost:9092 --group G2 --reset-offsets --topic T2:1 --to-offset 1 --execute
+
+    GROUP                          TOPIC                          PARTITION  NEW-OFFSET     
+    G2                             T2                             1          1              
+
+If we run our consumer again
+
+    alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic T2 --group G2 --from-beginning
+    Forth Record
+As expected we got the last record (fore:Forth Record)
