@@ -1,23 +1,23 @@
 ### Offset exercise
 
 In this excersise we will:
-* [Create a topic](#flink_one)
-* [Populate it with records with kafka_console_producer](#flink_two)
-* [Examine the log file directlly](#flink_three)
-* [Examine the consumer groups](#flink_fore)
-* [Manually adjust the offset](#flink_five)
+* [Create a topic](#oe1_flink_one)
+* [Populate it with records with kafka_console_producer](#oe1_flink_two)
+* [Examine the log file directlly](#oe1_flink_three)
+* [Examine the consumer groups](#oe1_flink_fore)
+* [Manually adjust the offset](#oe1_flink_five)
 
-Let us create a topic T2. <a name="flink_one"/>  
+Let us create a topic T2. <a name="oe1_flink_one"/>  
 
     ~/kafka/current/bin/kafka-topics --bootstrap-server localhost:9092 --create --topic T2 --partitions 3
-Let us polulate it with 4 records. <a name="flink_two"/>
+Let us polulate it with 4 records. <a name="oe1_flink_two"/>
  
      ~/kafka/current/bin/kafka-console-producer --broker-list localhost:9092 --topic T2 --property  "parse.key=true" --property "key.separator=:"
     >one:First Record
     >two:Second Record
     >three:Third One
     >fore:Forth Record 
- Let us have a look directly at the kafka log files with kafka-dump-log. <a name="flink_three"/>
+ Let us have a look directly at the kafka log files with kafka-dump-log. <a name="oe1_flink_three"/>
  
     alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-dump-log --deep-iteration --files ~/kafka_data/kafka/T2-0/00000000000000000000.log --print-data-log
     Dumping /home/alex/kafka_data/kafka/T2-0/00000000000000000000.log
@@ -46,7 +46,7 @@ one  | 2 (T2-2)
 two  | 0 (T2-0)
 three, fore | 1 (T2-1)
 
-Now we will check consumer groups with kafka-consumer-groups. <a name="flink_fore"/>
+Now we will check consumer groups with kafka-consumer-groups. <a name="oe1_flink_fore"/>
 
     alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-consumer-groups --bootstrap-server localhost:9092 --list
     KMOffsetCache-ubuntus1
@@ -92,7 +92,7 @@ If we try to rerun our consumer even with the **--from-beginning** option but *u
 
     alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic T2 --group G2 --from-beginning
 
-<a name="flink_five"/>
+<a name="oe1_flink_five"/>
 
 We can manually adjust an offset using *--reset-offsets* option. Since it is a danager operation we have two modes aka two options: *--dry-run* to check what the outcome would be (below) and *--execute* to perform a real action.
 
