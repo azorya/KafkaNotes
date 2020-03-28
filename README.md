@@ -3,6 +3,10 @@ some key points for the kafka project
 
 Where to get [CMAK](https://github.com/yahoo/CMAK)
 
+Schema registry links:
+1. [lenses.io](https://github.com/lensesio/schema-registry-ui)
+2. bla
+
 ### Offset exercise
 Let us create a topic T2.
 
