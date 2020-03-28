@@ -92,9 +92,6 @@ If we try to rerun our consumer even with the **--from-beginning** option but *u
 
     alex@ubuntus1:~/test$ ~/kafka/current/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic T2 --group G2 --from-beginning
 
-<a name="abcde">
-</a>
-
 <a name="flink_five"/>
 
 We can manually adjust an offset using *--reset-offsets* option. Since it is a danager operation we have two modes aka two options: *--dry-run* to check what the outcome would be (below) and *--execute* to perform a real action.
