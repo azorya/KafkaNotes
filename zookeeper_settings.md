@@ -1,17 +1,34 @@
-zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
-No we are creating a zookeeper node for our kafka_server
-zconsult@kafkaqa1:~$ ~/kafka/current/bin/zookeeper-shell localhost:2181
-Connecting to localhost:2181
-Welcome to ZooKeeper!
-JLine support is disabled
+Do not forget that JAVA_HOME environment veriable must be set.
 
-WATCHER::
+        zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
 
-WatchedEvent state:SyncConnected type:None path:null
-ls /
-[zookeeper]
-help
-ZooKeeper -server host:port cmd args
+To set up a zookeeper node for the kafka server we do the following:
+
+1.  Connect to the zookeeper.
+2.  Create a node.
+3.  Check result.
+
+Connect to the zookeeper.
+
+        zconsult@kafkaqa1:~$ ~/kafka/current/bin/zookeeper-shell localhost:2181
+        Connecting to localhost:2181
+        Welcome to ZooKeeper!
+        JLine support is disabled
+
+        WATCHER::
+
+        WatchedEvent state:SyncConnected type:None path:null
+
+Create a node.
+When we connect to the newly created _zookeeper ensemble_ it has only one node: _zookeeper_. We can check it using _ls_ command.
+
+    ls /
+    [zookeeper]
+
+We also can use _help_ command to get a list of zookeepers' commands
+
+    help
+    ZooKeeper -server host:port cmd args
         addauth scheme auth
         close
         config [-c] [-w] [-s]
@@ -37,8 +54,14 @@ ZooKeeper -server host:port cmd args
         setquota -n|-b val path
         stat [-w] path
         sync path
-Command not found: Command not found help
-create /kafka_server data
-Created /kafka_server
-ls /
-[kafka_server, zookeeper]
+       Command not found: Command not found help
+
+Create a new _kafka_server_ node for our kafka_server.
+
+    create /kafka_server data
+    Created /kafka_server
+
+Check the result.
+   
+   ls /
+   [kafka_server, zookeeper]
