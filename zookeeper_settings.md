@@ -21,6 +21,7 @@ Connect to the zookeeper. <a name="zs_flink_one"/>
         WatchedEvent state:SyncConnected type:None path:null
 
 Create a node.  <a name="zs_flink_two"/>
+
 When we connect to the newly created _zookeeper ensemble_ it has only one node: _zookeeper_. We can check it using _ls_ command.
 
     ls /
