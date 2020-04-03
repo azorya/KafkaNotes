@@ -65,5 +65,5 @@ We are using _create_ command to create _kafka_server_ node in the _/_ (root "di
 
 Check the result using _ls_ command. <a name="zs_flink_fore"/>
    
-   ls /
-   [kafka_server, zookeeper]
+    ls /
+    [kafka_server, zookeeper]
