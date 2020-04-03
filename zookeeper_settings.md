@@ -4,11 +4,12 @@ Do not forget that JAVA_HOME environment veriable must be set.
 
 To set up a zookeeper node for the kafka server we do the following:
 
-1.  Connect to the zookeeper.
-2.  Create a node.
-3.  Check result.
+1.  [Connect to the zookeeper.](#zs_flink_one)
+2.  [Create a node.](#zs_flink_two)
+     
+3.  [Check the result.](#zs_flink_fore)
 
-Connect to the zookeeper.
+Connect to the zookeeper. <a name="zs_flink_one"/>
 
         zconsult@kafkaqa1:~$ ~/kafka/current/bin/zookeeper-shell localhost:2181
         Connecting to localhost:2181
@@ -19,7 +20,7 @@ Connect to the zookeeper.
 
         WatchedEvent state:SyncConnected type:None path:null
 
-Create a node.
+Create a node.  <a name="zs_flink_two"/>
 When we connect to the newly created _zookeeper ensemble_ it has only one node: _zookeeper_. We can check it using _ls_ command.
 
     ls /
@@ -56,12 +57,13 @@ We also can use _help_ command to get a list of zookeepers' commands
         sync path
        Command not found: Command not found help
 
-Create a new _kafka_server_ node for our kafka_server.
+Create a new _kafka_server_ node for our kafka_server.  <a name="zs_flink_three"/>
+We are using _create_ command to create _kafka_server_ node in the _/_ (root "directory") . Please note that one must use the _data_ keyword while creating this type of nodes.
 
     create /kafka_server data
     Created /kafka_server
 
-Check the result.
+Check the result using _ls_ command. <a name="zs_flink_fore"/>
    
    ls /
    [kafka_server, zookeeper]
