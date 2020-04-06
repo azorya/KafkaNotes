@@ -9,8 +9,8 @@ We have to create a zookeeper node for CMAK app
 
     WatchedEvent state:SyncConnected type:None path:null
     ls /
-   [apps, zookeeper]
-   ls /apps
-  [kafka_server]
-  create /apps/cmak data
-  Created /apps/cmak
+    [apps, zookeeper]
+    ls /apps
+    [kafka_server]
+    create /apps/cmak data
+    Created /apps/cmak
