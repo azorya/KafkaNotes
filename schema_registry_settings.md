@@ -13,3 +13,9 @@ to check:
     T1
     __consumer_offsets
     _schemas_qa123
+
+note the replication
+
+    zconsult@kafkaqa1:~$ /opt/kafka/bin/kafka-topics --bootstrap-server localhost:9092 --topic _schemas_qa123 --describe
+    Topic: _schemas_qa123	PartitionCount: 1	ReplicationFactor: 3	Configs: cleanup.policy=compact,segment.bytes=1073741824
+	Topic: _schemas_qa123	Partition: 0	Leader: 2	Replicas: 2,3,1	Isr: 2,3,1
