@@ -1,3 +1,5 @@
+**Java Notes.**
+
 To run Kafka and all the Kafka utils one needs Java. 
 One possible way to deal with this is to install Java as a standard package using your package management
 tool (_apt_ or _apt-get_ in case of Debian based Linux) The downside of this method is that this _default_ Java will be in your path and if one wants to switch to the _different_ Java version it it will become more difficult.
