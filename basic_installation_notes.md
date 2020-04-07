@@ -27,7 +27,17 @@ In the _kafka_ directory habe have _current_ link pointing to our extracted pack
     -rw-rw-r-- 1 zconsult zconsult 287561707 Apr  2 14:42 confluent-community-5.4.1-2.12.tar.gz
     lrwxrwxrwx 1 zconsult zconsult        16 Apr  2 14:43 current -> confluent-5.4.1/
 
-In the _kafka_ directoy we have the standard directory structure:
+As with [java](./JavaNotes.md) we made our installation visible and accessable via _/opt_ dir:
+
+    consult@kafkaqa3:~$ ls -l /opt
+    total 0
+    lrwxrwxrwx 1 root root 28 Apr  3 05:37 kafka -> /home/zconsult/kafka/current
+    lrwxrwxrwx 1 root root 26 Apr  3 04:43 kafka_data -> /home/zconsult/kafka_data/
+    lrwxrwxrwx 1 root root 24 Apr  6 18:35 kafka_java -> /home/zconsult/apps/java
+
+So _/opt/kafka_ refers to the _current_ kafka installation in the zconsult user home dir. All our configuration changes must refer this _externally visible_ path via _/opt_.
+
+In the _kafka_ directoy we have the following directory structure:
 
     zconsult@kafkaqa3:~$ cd ~/kafka/current
     zconsult@kafkaqa3:~/kafka/current$ ls -l
@@ -104,8 +114,9 @@ and  _git diff_ whill show exactly _what_ was changed. Example below is a partia
  
 All the changes are easily visible.
 
+We are ready to [configure and launch zookeeper]().
 
-****Kafka data**** <a name="bin_flink_two"/>
+****Kafka data location notes.**** <a name="bin_flink_two"/>
 
 Kafka_data directory in our configuration is the place where kafka and zookeeper keep/write their data (messages for the Kafka and its database like structures for the zookeeper).
 
@@ -118,7 +129,7 @@ kafka_data dir has two sub-dirs _kafka_ and _zoo_:
 
 In the _kafka_ dir is for Kafka daemon, _zoo_ is for the zookeeper one.
 
-In the production environment it is much better to configure Kafka to write to the separate hdd, but on some of our boxes we currently have only one. Also please note that zookeeper could be configured to keep its data in a completely separate place. To simplify our installation/configuration process we put them (kafka & zookeeper) data directories in one place.
+In the production environment it is much better to configure Kafka to write to the separate hdd, but on some of our boxes we currently have only one. Also please note that zookeeper could be configured to keep its data in a completely separate place. To simplify our installation/configuration process we put them (kafka & zookeeper) data directories in the one place.
 
 
 
