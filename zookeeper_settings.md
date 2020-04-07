@@ -6,7 +6,7 @@ We will confugure and check three node _zookeeper ensemble_. That is the prefere
 We have to:
 
 1.  [Configure a single node](#zs_flink_one)
-2.  [Propagate  this changes to other nodes]()
+2.  [Propagate  this changes to other nodes](#zs_flink_two)
 3.  [Launch and test our ensemble]()
 
 Do not forget that JAVA_HOME environment veriable must be set.
@@ -14,8 +14,8 @@ Do not forget that JAVA_HOME environment veriable must be set.
         zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
 
 To configure a zookeper node we are going to: <a name="zs_flink_one"/>
-*  make the [following changes](#zs_flink_one_one) in the zookeeper.properties file.
-*  create a [myid file](#zs_flink_one_one).
+*  [make the following changes](#zs_flink_one_one) in the zookeeper.properties file.
+*  [create a myid file](#zs_flink_one_one).
 
 In our case _zookeeper.properties_ file is visible through _/opt_
 
@@ -55,11 +55,31 @@ Let us examine our changes using **git diff** command: <a name="zs_flink_one_one
     zconsult@kafkaqa1:/opt/kafka/etc/kafka$
 
 We changed the _DataDir_ location from /tmp/zookeeper to the _/opt/kafka_data/zoo_, add  three lines describing our servers:
-_server.1=10.111.30.26:2888:3888_, and add a couple of more params.
+_server.1=10.111.30.26:2888:3888_, and added a couple of more params.
 
 Now we have to add myid file to the /opt/kafka_data/zoo directory. <a name="zs_flink_one_two"/>
 
     zconsult@kafkaqa1:/opt/kafka/etc/kafka$ ls /opt/kafka_data/zoo
     myid  version-2
+    
+The content of this file is a single number (id of our zookeeper node).
+
     zconsult@kafkaqa1:/opt/kafka/etc/kafka$ cat /opt/kafka_data/zoo/myid 
     1
+
+We have to make similar changes (or simply _scp_ them) to all our nodes. <a name="zs_flink_two"/> 
+Please note that the content of _myid_ file is unique for each node.
+
+On the kafkaqa2:
+
+    zconsult@kafkaqa2:/home$ cat /opt/kafka_data/zoo/myid
+    2
+
+On the kafkaqa3:
+
+    zconsult@kafkaqa3:~$ cat /opt/kafka_data/zoo/myid
+    3
+
+
+
+
