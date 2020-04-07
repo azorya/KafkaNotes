@@ -1,6 +1,6 @@
 # KafkaNotes
 
-First thing first, to use kafka one must have [java]
+First thing first, to use kafka one must have [java](javaNotes.md)
 
 some key points for the kafka project
 
