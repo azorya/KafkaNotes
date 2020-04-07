@@ -1,80 +1,65 @@
+
+**Zookeeper configuration notes.**
+
+We will confugure and check three node _zookeeper ensemble_. That is the prefered way to use zookeeper with kafka cluster. The main differnce is that all the data a shared between all the members of the _ensemble_ making it possible to work with some of our nodes down. 
+
+We have to:
+
+1.  [Configure a single node](#zs_flink_one)
+2.  [Propagate  this changes to other nodes]()
+3.  [Launch and test our ensemble]()
+
 Do not forget that JAVA_HOME environment veriable must be set.
 
         zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
 
-To set up a zookeeper node for the kafka server we do the following:
+To configure a zookeper node we are going to: <a name="zs_flink_one"/>
+*  make the [following changes](#zs_flink_one_one) in the zookeeper.properties file.
+*  create a [myid file](#zs_flink_one_one).
 
-1.  [Connect to the zookeeper.](#zs_flink_one)
-2.  [Create a node.](#zs_flink_two)
+In our case _zookeeper.properties_ file is visible through _/opt_
+
+     zconsult@kafkaqa1:/opt/kafka/etc/kafka$ cd /opt/kafka/etc/kafka
+     zconsult@kafkaqa1:/opt/kafka/etc/kafka$ ls -l zookeeper.properties
+    -rw-r--r-- 1 zconsult zconsult 1372 Apr  3 05:59 zookeeper.properties
+
+Let us examine our changes using **git diff** command: <a name="zs_flink_one_one"/>
      
-3.  [Check the result.](#zs_flink_fore)
+    git diff zookeeper.properties
+    diff --git a/kafka/zookeeper.properties b/kafka/zookeeper.properties
+    index 90f4332..d48d7de 100644
+    --- a/kafka/zookeeper.properties
+    +++ b/kafka/zookeeper.properties
+    @@ -13,11 +13,20 @@
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    # the directory where the snapshot is stored.
+    -dataDir=/tmp/zookeeper
+    +dataDir=/opt/kafka_data/zoo
+    # the port at which the clients will connect
+    clientPort=2181
+    # disable the per-ip limit on the number of connections since this is a non-production config
+    maxClientCnxns=0
+    +
+    +# to be changed later to proper names
+    +server.1=10.111.30.26:2888:3888
+    +server.2=10.111.30.27:2888:3888
+    +server.3=10.111.30.28:2888:3888
+    +
+    +
+    +initLimit=20
+    +syncLimit=5
+    # Disable the adminserver by default to avoid port conflicts.
+    # Set the port to something non-conflicting if choosing to enable this
+    admin.enableServer=false
+    zconsult@kafkaqa1:/opt/kafka/etc/kafka$
 
-Connect to the zookeeper. <a name="zs_flink_one"/>
+We changed the _DataDir_ location from /tmp/zookeeper to the _/opt/kafka_data/zoo_, add  three lines describing our servers:
+_server.1=10.111.30.26:2888:3888_, and add a couple of more params.
 
-        zconsult@kafkaqa1:~$ ~/kafka/current/bin/zookeeper-shell localhost:2181
-        Connecting to localhost:2181
-        Welcome to ZooKeeper!
-        JLine support is disabled
+Now we have to add myid file to the /opt/kafka_data/zoo directory. <a name="zs_flink_one_two"/>
 
-        WATCHER::
-
-        WatchedEvent state:SyncConnected type:None path:null
-
-Create a node.  <a name="zs_flink_two"/>
-
-When we connect to the newly created _zookeeper ensemble_ it has only one node: _zookeeper_. We can check it using _ls_ command.
-
-    ls /
-    [zookeeper]
-
-We also can use _help_ command to get a list of zookeepers' commands
-
-    help
-    ZooKeeper -server host:port cmd args
-        addauth scheme auth
-        close
-        config [-c] [-w] [-s]
-        connect host:port
-        create [-s] [-e] [-c] [-t ttl] path [data] [acl]
-        delete [-v version] path
-        deleteall path
-        delquota [-n|-b] path
-        get [-s] [-w] path
-        getAcl [-s] path
-        history
-        listquota path
-        ls [-s] [-w] [-R] path
-        ls2 path [watch]
-        printwatches on|off
-        quit
-        reconfig [-s] [-v version] [[-file path] | [-members serverID=host:port1:port2;port3[,...]*]] | [-add serverId=host:port1:port2;port3[,...]]* [-remove serverId[,...]*]
-        redo cmdno
-        removewatches path [-c|-d|-a] [-l]
-        rmr path
-        set [-s] [-v version] path data
-        setAcl [-s] [-v version] [-R] path acl
-        setquota -n|-b val path
-        stat [-w] path
-        sync path
-       Command not found: Command not found help
-
-Create a new _kafka_server_ node for our kafka_server.  <a name="zs_flink_three"/>
-We are using _create_ command to create _kafka_server_ node in the _/_ (root "directory") . Please note that one must use the _data_ keyword while creating this type of nodes.
-
-    create /kafka_server data
-    Created /kafka_server
-
-Check the result using _ls_ command. <a name="zs_flink_fore"/>
-   
-    ls /
-    [kafka_server, zookeeper]
-
-Please note that this is a slightly simplified example. Our real configuration is a bit different:
-   
-    ls /
-    [apps, zookeeper]
-    ls /apps
-    [cmak, kafka_server]
-
-The Kafka cluster is not the only zookeeper client in our current setup. That is why why use a top node _apps_ and
-our Kafka related node is _kafka_server_. _cmak_ node was created for the Kafka GUI tool.
+    zconsult@kafkaqa1:/opt/kafka/etc/kafka$ ls /opt/kafka_data/zoo
+    myid  version-2
+    zconsult@kafkaqa1:/opt/kafka/etc/kafka$ cat /opt/kafka_data/zoo/myid 
+    1
