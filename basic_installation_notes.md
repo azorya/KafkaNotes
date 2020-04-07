@@ -13,8 +13,6 @@ Our steps are :
 4. [Configure Schema Registry]()
 
 
-
-
 ***Directories and links.*** <a name="bin_flink_one"/>
 As was mentioned above we use manual installation. We extract our [package](#bin_flink_zero) to the home directory of _zconsult_ user. Please note _kafka_ and [_kafka_data_](#bin_flink_two) direcories.
 
@@ -47,6 +45,65 @@ The _bin_ directory contains all the _shell files_ we are goinf to use to launch
 The _etc_ directory contains all our configuration files. The _lib_ dir contains examples of systemd service files. The _logs_ dir will cbe the place where zookeeper, kafka & schema-registry deamons will write their log files.
 
 Finally _src_ directory has a few archives, which will be used later in the development.
+
+Let us make all the changes in the config files we are going to make easily visible.
+First let us _cd_ to the _etc_ directory and run and look.
+
+    zconsult@kafkaqa1:~/kafka/current/etc$ cd ~/kafka/current/etc
+    zconsult@kafkaqa1:~/kafka/current/etc$ ls -l
+    total 40
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  2 14:33 confluent-common
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  6 19:11 kafka
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  2 14:33 kafka-connect-elasticsearch
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  2 14:33 kafka-connect-jdbc
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  2 14:33 kafka-connect-s3
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  2 14:33 kafka-connect-storage-common
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  2 14:33 kafka-rest
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  2 14:33 ksql
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  2 14:33 rest-utils
+    drwxr-xr-x 2 zconsult zconsult 4096 Apr  2 14:33 schema-registry
+
+All the kafka daemons (kafka, zookeeper, schema-registry) and _connectors_ configurations are stored in this directories.
+
+Let us use __git__ tool to make our changes easily visible.
+One must use _"git init"_, _"git add *"_ and _"git commit"_ commands.
+
+Now when we change some configuration files _git status_ command will show exactly which files were changed:
+ 
+    zconsult@kafkaqa1:~/kafka/current/etc$ git status
+    On branch master
+    Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   kafka/server.properties
+	modified:   kafka/zookeeper.properties
+
+and  _git diff_ whill show exactly _what_ was changed. Example below is a partial output:
+
+    zconsult@kafkaqa1:~/kafka/current/etc$ git diff  kafka/server.properties
+    diff --git a/kafka/server.properties b/kafka/server.properties
+    index fc9ba00..b2fcd8f 100644
+    --- a/kafka/server.properties
+    +++ b/kafka/server.properties
+    @@ -18,7 +18,7 @@
+    ############################# Server Basics #############################
+ 
+    # The id of the broker. This must be set to a unique integer for each broker.
+    -broker.id=0
+    +broker.id=1
+ 
+    ############################# Socket Server Settings #############################
+ 
+    @@ -57,7 +57,7 @@ socket.request.max.bytes=104857600
+    ############################# Log Basics #############################
+ 
+     # A comma separated list of directories under which to store log files
+    -log.dirs=/tmp/kafka-logs
+    +log.dirs=/opt/kafka_data/kafka
+ 
+All the changes are easily visible.
+
 
 ****Kafka data**** <a name="bin_flink_two"/>
 
