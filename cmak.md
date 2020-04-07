@@ -9,13 +9,13 @@ Our steps are:
 3.  [install & configure](#cmak_flink_three)
 4.  [run & test](#cmak_flink_fore)
 
-[***get CMAK***]  <a name="cmak_flink_one"/>
+***get CMAK***  <a name="cmak_flink_one"/>
 
 To get CMAK we use **git**.
 
     git clone https://github.com/yahoo/CMAK.git
 
-[***Build***] <a name="cmak_flink_two"/>
+***Build*** <a name="cmak_flink_two"/>
 
 To build it we must have java in our PATH.
 
