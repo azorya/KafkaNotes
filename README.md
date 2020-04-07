@@ -1,4 +1,7 @@
 # KafkaNotes
+
+First thing first, to use kafka one must have [java]
+
 some key points for the kafka project
 
 Where to get [CMAK](https://github.com/yahoo/CMAK)
