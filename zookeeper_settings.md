@@ -101,7 +101,7 @@ Do not forget that JAVA_HOME environment veriable must be set one way or another
 
         zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
         
-To launch a zookeeper process on a node use _zookeeper-server-start_ command from the kafka _bin_ directory. <a name="zs_flink_launch"/>
+To launch a zookeeper process on a node use _zookeeper-server-start_ command from the kafka _bin_ directory.
 
     /opt/kafka/bin/zookeeper-server-start -daemon /opt/kafka/etc/kafka/zookeeper.properties
 
@@ -120,5 +120,7 @@ To check for zookeeper log files (for example if something went wrong) check our
 
 zookeeper writes to quite a few files but _zookeeper.out_ is a good place to start looking.
 
-Do not forget repeat your [launch command](#zs_flink_launch) on all the boxes.
+Do not forget repeat your launch command on all the boxes.
+
+As a test let us [create a zookeeper node.](./zookeeper_node_for_kafka.md) 
 
