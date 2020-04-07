@@ -114,7 +114,7 @@ and  _git diff_ whill show exactly _what_ was changed. Example below is a partia
  
 All the changes are easily visible.
 
-We are ready to [configure and launch zookeeper]().
+We are ready to [configure and launch zookeeper](./zookeeper_settings.md).
 
 ****Kafka data location notes.**** <a name="bin_flink_two"/>
 
