@@ -68,3 +68,13 @@ Check the result using _ls_ command. <a name="zs_flink_fore"/>
    
     ls /
     [kafka_server, zookeeper]
+
+Please note that this is a slightly simplified example. Our real configuration is a bit different:
+   
+    ls /
+    [apps, zookeeper]
+    ls /apps
+    [cmak, kafka_server]
+
+The Kafka cluster is not the only zookeeper client in our current setup. That is why why use a top node _apps_ and
+our Kafka related node is _kafka_server_. _cmak_ node was created for the Kafka GUI tool.
