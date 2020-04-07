@@ -8,7 +8,7 @@ We use similar approach to install Kafka that we use for [Java](./JavaNotes.md).
 Our steps are :
 
 1. [Prepare all the directories and links](#bin_flink_one)
-2. [Configure Zookeeper]()
+2. [Configure Zookeeper](./zookeeper_settings.md)
 3. [Configure Kafka]()
 4. [Configure Schema Registry]()
 
