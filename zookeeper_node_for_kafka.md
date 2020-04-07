@@ -11,7 +11,7 @@ To create a zookeeper node (for example for kafka) we do the following:
      
 3.  [Check the result.](#zs_flink_fore)
 
-Connect to the zookeeper. <a name="zs_flink_one"/>
+Connect to the zookeeper using _zookeeper-shell_. <a name="zs_flink_one"/>
 
         zconsult@kafkaqa1:~$ ~/kafka/current/bin/zookeeper-shell localhost:2181
         Connecting to localhost:2181
