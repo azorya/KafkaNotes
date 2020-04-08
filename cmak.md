@@ -1,6 +1,6 @@
 **CMAK (former KafkaManager) Notes.**
 
-CMAK (former KafkaManager) is a useful tool to help with some kafka realted tasks like managing topics, browsing and monitoring.
+[CMAK](https://github.com/yahoo/CMAK) (former KafkaManager) is a useful tool to help with some kafka realted tasks like managing topics, browsing and monitoring.
 
 Our steps are:
 
