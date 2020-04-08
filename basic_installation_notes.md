@@ -1,7 +1,7 @@
 **Basic Installation Notes.**
 
 We have the same [Confluent](https://www.confluent.io/) community Kafka installation on all our boxes.
-Currently we use confluent-community-5.4.1-2.12.tar.gz <a name="bin_flink_zero"/> package.
+Current version is confluent-community-5.4.1-2.12.tar.gz <a name="bin_flink_zero"/>.
 
 We use similar approach to install Kafka that we use for [Java](./JavaNotes.md).
 
@@ -116,7 +116,7 @@ All the changes are easily visible.
 
 We are ready to [configure and launch zookeeper](./zookeeper_settings.md).
 
-****Kafka data location notes.**** <a name="bin_flink_two"/>
+****Kafka data location.**** <a name="bin_flink_two"/>
 
 Kafka_data directory in our configuration is the place where kafka and zookeeper keep/write their data (messages for the Kafka and its database like structures for the zookeeper).
 
@@ -129,7 +129,9 @@ kafka_data dir has two sub-dirs _kafka_ and _zoo_:
 
 In the _kafka_ dir is for Kafka daemon, _zoo_ is for the zookeeper one.
 
-In the production environment it is much better to configure Kafka to write to the separate hdd, but on some of our boxes we currently have only one. Also please note that zookeeper could be configured to keep its data in a completely separate place. To simplify our installation/configuration process we put them (kafka & zookeeper) data directories in the one place.
+In the production environment it is better to configure Kafka to write to the separate hdd, but on some of our boxes we currently have only one. 
+
+Also please note that zookeeper could be configured to keep its data in a completely separate place. To simplify our installation/configuration process we put them (kafka & zookeeper) data directories in the one place.
 
 
 
