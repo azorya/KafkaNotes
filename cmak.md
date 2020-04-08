@@ -1,8 +1,8 @@
 **CMAK (former KafkaManager) Notes.**
 
-[CMAK](https://github.com/yahoo/CMAK) (former KafkaManager) is a useful tool to help with some kafka realted tasks like managing topics, browsing and monitoring.
+[CMAK](https://github.com/yahoo/CMAK) (former KafkaManager) is a useful tool to help with some kafka realted tasks like managing topics, browsing and monitoring. It is build and installed on the _kafkaqamini1_ box.
 
-Our steps are:
+To get it "from scratch" our steps are:
 
 1.  [get CMAK](#cmak_flink_one) 
 2.  [build it](#cmak_flink_two) 
