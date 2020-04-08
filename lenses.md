@@ -33,3 +33,4 @@ Our changes are:
 
 We changed only two lines: the path to our schema_registry service (which currently running on the _kafkaqa1_ box) and _readonlyMode_ to false.
 
+To use it **run a web browser on the same box** (firefox on the _kafkaqadmin1_ box) and go to the http://localhost:8080/
