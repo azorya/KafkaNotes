@@ -2,14 +2,11 @@
 
 To use kafka one must have [java](./JavaNotes.md) accesseble for it. 
 
-Some notes about:
+Our first steps are:
 
 *  [install & config our main components](./basic_installation_notes.md)
-*  useful gui tools to work with [kafka]() and [schema_registry]()
+*  get some useful gui tools to work with [kafka](./cmka.md) and [schema_registry](./lenses.md)
 
-some key points for the kafka project
-
-Where to get [CMAK](https://github.com/yahoo/CMAK)
-1. [lenses.io](https://github.com/lensesio/schema-registry-ui), [npm  is needed before](https://www.sitepoint.com/beginners-guide-node-package-manager/)
-2. [Offest exercise 1](./offset_exercise1.md)
+Then we have a few excerices to illustrate basic command line tools usage. 
+[Offest exercise 1](./offset_exercise1.md)
 
