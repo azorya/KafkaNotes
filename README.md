@@ -2,7 +2,10 @@
 
 To use kafka one must have [java](./JavaNotes.md) accesseble for it. 
 
-The next step is [install & config]()
+Some notes about:
+
+*  [install & config our main components](./basic_installation_notes.md)
+*  useful gui tools to work with [kafka]() and [schema_registry]()
 
 some key points for the kafka project
 
