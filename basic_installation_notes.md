@@ -1,6 +1,6 @@
 **Basic Installation Notes.**
 
-We have the same [Confluent](https://www.confluent.io/) community Kafka installation on all our boxes.
+We have [Confluent](https://www.confluent.io/) community Kafka installation on all our boxes.
 Current version is confluent-community-5.4.1-2.12.tar.gz <a name="bin_flink_zero"/>.
 
 We use similar approach to install Kafka that we use for [Java](./JavaNotes.md).
