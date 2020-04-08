@@ -1,6 +1,8 @@
 # KafkaNotes
 
-To use kafka one must have [java](./JavaNotes.md) accesseble somehow. 
+To use kafka one must have [java](./JavaNotes.md) accesseble for it. 
+
+The next step is [install & config]()
 
 some key points for the kafka project
 
