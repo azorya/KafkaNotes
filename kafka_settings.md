@@ -83,7 +83,7 @@ To view the changes we use the **git command**:
  
  We made a few changes:
  *  _broker.id_ is the unique id of the kafka node.
- *  _log.dirs_  is the location(s) where kafka stores the data.
+ *  _log.dirs_  is the location(s) where kafka stores the data. Please look at the last paragraph in our [basic installation](./basic_installation_notes.md)
 
     
     
