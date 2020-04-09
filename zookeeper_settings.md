@@ -1,5 +1,5 @@
 
-**Zookeeper configuration notes**
+**zookeeper configuration**
 
 We will confugure and check three node _zookeeper ensemble_. That is the prefered way to use zookeeper with kafka cluster. The main differnce is that all the data a shared between all the members of the _ensemble_ making it possible to work with some of our nodes down. 
 
