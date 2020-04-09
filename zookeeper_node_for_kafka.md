@@ -71,7 +71,7 @@ Check the result using _ls_ command. <a name="zs_flink_fore"/>
     ls /
     [kafka_server, zookeeper]
 
-Please note that this is a slightly simplified example. Our real configuration is a bit different:
+Please note that this is a slightly simplified example. Our real configuration is a bit different:  <a name="zs_flink_last"/>
    
     ls /
     [apps, zookeeper]
