@@ -88,6 +88,9 @@ To view the changes we use the **git** command:
  * _offsets.topic.replication.factor_ & _transaction.state.log.replication.factor_ are settings for the _replication_ of kafka internal(system) topics.
  * _log.cleanup.policy=delete_ means that after kafka log file is exipred it must be deleted.
  * _zookeeper.connect_ is a way our kafka node finds a _zookeeper enseble_. Please note that we use a zookeeper nodes we [created](./zookeeper_node_for_kafka.md#zs_flink_last) before.
+ * finally we disable _confluent.support.metrics.enable_
+ 
+ 
  
 
     
