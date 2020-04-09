@@ -1,4 +1,4 @@
-**Basic Installation Notes.**
+## Basic Installation Notes.
 
 We have [Confluent](https://www.confluent.io/) community Kafka installation on all our boxes.
 Current version is confluent-community-5.4.1-2.12.tar.gz <a name="bin_flink_zero"/>.
@@ -13,7 +13,7 @@ Our steps are :
 4. [Configure Schema Registry]()
 
 
-***Directories and links.*** <a name="bin_flink_one"/>
+### Directories and links. <a name="bin_flink_one"/>
 As was mentioned above we use manual installation. We extract our [package](#bin_flink_zero) to the home directory of _zconsult_ user. Please note _kafka_ and [_kafka_data_](#bin_flink_two) direcories.
 
     zconsult@kafkaqa3:~$ ls ~
@@ -116,7 +116,7 @@ All the changes are easily visible.
 
 We are ready to configure and launch [zookeeper](./zookeeper_settings.md), [kafka](./kafka_settings.md) and schema_registry.
 
-****Kafka data location.**** <a name="bin_flink_two"/>
+#### Kafka data location.<a name="bin_flink_two"/>
 
 Kafka_data directory in our configuration is the place where kafka and zookeeper keep/write their data (messages for the Kafka and its database like structures for the zookeeper).
 
