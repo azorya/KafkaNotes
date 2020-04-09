@@ -1,4 +1,4 @@
- **Schema-Registry-GUI**
+ ## Schema-Registry-GUI
  
  We use the following [schema-registry-ui](https://github.com/lensesio/schema-registry-ui).
  It gives a nice alternative to the plain _curl_ command.
