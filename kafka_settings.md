@@ -192,3 +192,5 @@ Here is a part of it:
     log4j.appender.kafkaAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
 
 This way one can controll everything: the level of output messages (ERROR, INFO, DEBUG), the format, the output files, etc.
+
+To test our kafka cluster let us do some [exercise.](./offset_exercise1.md)
