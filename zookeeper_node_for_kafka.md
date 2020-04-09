@@ -1,4 +1,4 @@
-**Creating a Zookeeper node example.**
+## Creating a Zookeeper node example.
 
 Do not forget that JAVA_HOME environment veriable must be set.
 
