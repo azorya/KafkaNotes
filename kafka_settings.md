@@ -1,6 +1,6 @@
 **Kafka Settings**
 
-We will confugure and check three node kafka cluster. That is the smallest possible setup which can work as a _cluster_. The main differnce between a _cluster_ and a _standalone kafka_ is that it is possible to work with some of our nodes down. 
+We will confugure a three node kafka cluster. That is the smallest possible setup which can work as a _cluster_. The main differnce between a _cluster_ and a _standalone kafka_ is that it is possible to work with some of our nodes down. 
 
 We have to:
 
@@ -10,5 +10,5 @@ We have to:
 
 
 
-***kafka node config*** <a name="zs_flink_one"/>
+***kafka node config*** <a name="ks_flink_one"/>
 
