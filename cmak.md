@@ -1,4 +1,4 @@
-**CMAK (former KafkaManager) Notes.**
+## CMAK (former KafkaManager) Notes.
 
 [CMAK](https://github.com/yahoo/CMAK) (former KafkaManager) is a useful tool to help with some kafka realted tasks like managing topics, browsing and monitoring. It is build and installed on the _kafkaqamini1_ box.
 
@@ -9,13 +9,13 @@ To get it "from scratch" our steps are:
 3.  [install & configure](#cmak_flink_three)
 4.  [run & test](#cmak_flink_fore)
 
-***get CMAK***  <a name="cmak_flink_one"/>
+#### get CMAK  <a name="cmak_flink_one"/>
 
 To get CMAK we use **git**.
 
     git clone https://github.com/yahoo/CMAK.git
 
-***Build*** <a name="cmak_flink_two"/>
+#### Build <a name="cmak_flink_two"/>
 
 To build it we must have java in our PATH.
 
@@ -38,7 +38,7 @@ The building process takes some time. It downloads quite a bit in the ~/sbt dire
 
 That archive file is what we want to deploy on the box where this app is going to run.
 
-***Install & Config*** <a name="cmak_flink_three"/>
+##### Install & Config <a name="cmak_flink_three"/>
 
 We must create a _zookeeper node_ [like we did in this exercise](./zookeeper_node_for_kafka.md) for the CMAK app
 
@@ -79,7 +79,7 @@ Our changes are the following (just one line):
 
 We are pointing out to the zookeeper node (_kafkaqa2:2181/apps/cmak_) we created on the previous step.
 
-***Run & test*** <a name="cmak_flink_fore"/>
+#### Run & test <a name="cmak_flink_fore"/>
 
 To run this app just go to the _bin_ dir and execute _cmak_ command.
  
