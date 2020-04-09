@@ -11,7 +11,7 @@ We have to:
 
 
 
-***Zookeeper node changes*** <a name="zs_flink_one"/>
+***zookeeper node changes*** <a name="zs_flink_one"/>
 
 To configure a zookeper node we are going to: 
 *  [make the following changes](#zs_flink_one_one) in the zookeeper.properties file.
