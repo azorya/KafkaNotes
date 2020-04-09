@@ -1,4 +1,4 @@
-**Kafka Settings**
+## Kafka Settings
 
 We will confugure a three node kafka cluster. That is the smallest possible setup which can work as a _cluster_. The main differnce between a _cluster_ and a _standalone kafka_ is that it is possible to work with some of our nodes down. 
 
@@ -10,7 +10,7 @@ We have to:
 
 
 
-***server.properties file*** <a name="ks_flink_one"/>
+### server.properties file <a name="ks_flink_one"/>
 
 As with zookeeper settings we have a link to this config file in the  _/opt_
 
@@ -92,6 +92,14 @@ To view the changes we use the **git** command:
  
  
  
+
+### Propagate changes to all the nodes <a name="ks_flink_two"/> 
+
+As with zookeeper we have to make similar changes (or simply _scp_ them) one all our nodes. 
+
+The other and probably better way to deal with the configuration would be to have a central git repository.
+In this repo we could make all the changes for the entire cluster, check it out on each node, and make only local _corrections like broker_id_ locally.
+The only downside in this case that only local changes are immediatly visible.
 
     
     
