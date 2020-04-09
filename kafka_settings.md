@@ -90,8 +90,6 @@ To view the changes we use the **git** command:
  * _zookeeper.connect_ is a way our kafka node finds a _zookeeper enseble_. Please note that we use a zookeeper nodes we [created](./zookeeper_node_for_kafka.md#zs_flink_last) before.
  * finally we disable _confluent.support.metrics.enable_
  
- 
- 
 
 ### Propagate changes to all the nodes <a name="ks_flink_two"/> 
 
@@ -102,5 +100,95 @@ In this repo we could make all the changes for the entire cluster, check it out 
 The only downside in this case that only local changes are immediatly visible.
 
     
+### Launch and test <a name="ks_flink_three"/> 
+
+There are three different ways to start kafka related server processes. 
+
+* Run them from the command line.
+* Run them from the command line as _daemons_.
+* Run them as _systemd services_.
+
+The difference between first two options is that a _daemon_ will be running even if the terminal it was launched from is closed.
+
+Do not forget that JAVA_HOME environment veriable must be set one way or another.
+
+        zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
+        
+To launch a kafka server process on a node use _zookeeper-server-start_ command from the kafka _bin_ directory.
+
+    ### Launch and test <a name="zs_flink_three"/> 
+
+There are three different ways to start kafka related server processes. 
+
+* Run them from the command line.
+* Run them from the command line as _daemons_.
+* Run them as _systemd services_.
+
+The difference between first two options is that a _daemon_ will be running even if the terminal it was launched from is closed.
+
+Do not forget that JAVA_HOME environment veriable must be set one way or another.
+
+        zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
+        
+To launch a zookeeper process on a node use _kafka-server-start_ command from the kafka _bin_ directory.
+
+    /opt/kafka/bin/kafka-server-start -daemon /opt/kafka/etc/kafka/server.properties
     
+
+One of the quick ways to check if kafka process is running is to run _ps_ command _grep_ either for _kafka_ or, keeping in mind that all the _daemons_ are java processes, for _java_
+
+There are also a few log files kafka server writes to. The first one to look is **kafkaServer.out**
+
+    zconsult@kafkaqa3:/opt/kafka/logs$ ls -l kafkaServer.out 
+    -rw-rw-r-- 1 zconsult zconsult 151288 Apr  9 08:59 kafkaServer.out
+
+One of the key points here is that _kafka server dumps its configuration in this file while starting. That is a very convinient way to check if the config changes you made did really take place._ For example here is a small fragment:
+
+    [2020-04-08 20:09:13,271] INFO KafkaConfig values:
+            advertised.host.name = null
+            advertised.listeners = null
+            advertised.port = null
+            alter.config.policy.class.name = null
+            alter.log.dirs.replication.quota.window.num = 11
+            alter.log.dirs.replication.quota.window.size.seconds = 1
+            authorizer.class.name =
+            auto.create.topics.enable = false
+            auto.leader.rebalance.enable = true
+            background.threads = 10
+            broker.id = 3
+
+Please note _auto.create.topics.enable = false_ string.
+
+Another file to look at is **server.log** . That is a _common_ file for our servicies. It means that the kafka server _shares_ it with zookeeper, so in case of some problems one can see error messages from both servers which can help to find the orinigal cause.
+
+There are a few more log file: state-change.log, log-cleaner.log, etc.
+
+Please also note that the **log settings are controlled by log4j** system. The detailed description of it is a way out of scope here, but here are a few hints. Let us check the _java options_ our kafka server is running with.  
+
+    zconsult@kafkaqa1:~$ ps -eaf | grep "server.prop"
+    zconsult  3232     1  1 Apr08 ?        00:09:02 /opt/kafka_java/bin/java -Xmx1G -Xms1G -server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -Djava.awt.headless=true -Xlog:gc*:file=/opt/kafka/bin/../logs/kafkaServer-gc.log:time,tags:filecount=10,filesize=102400 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dkafka.logs.dir=/opt/kafka/bin/../logs -Dlog4j.configuration=file:/opt/kafka/bin/../etc/kafka/log4j.properties -cp /opt/kafka/bin/../share/java/kafka/*:/opt/kafka/bin/../support-metrics-client/build/dependant-libs-2.12.10/*:/opt/kafka/bin/../support-metrics-client/build/libs/*:/usr/share/java/support-metrics-client/* io.confluent.support.metrics.SupportedKafka /opt/kafka/etc/kafka/server.properties
+ 
+Please note the following string _-Dlog4j.configuration=file:/opt/kafka/bin/../etc/kafka/log4j.properties_
+
+let us have a look at this (log4j.properties) file
     
+    zconsult@kafkaqa3:/opt/kafka/etc/kafka$ ls -l log4j.properties 
+    -rw-r--r-- 1 zconsult zconsult 4675 Apr  2 14:43 log4j.properties
+
+Here is a part of it:
+
+    # Unspecified loggers and loggers with additivity=true output to server.log and stdout
+    # Note that INFO only applies to unspecified loggers, the log level of the child logger is used otherwise
+    log4j.rootLogger=INFO, stdout, kafkaAppender
+
+    log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+    log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+    log4j.appender.stdout.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+    log4j.appender.kafkaAppender=org.apache.log4j.DailyRollingFileAppender
+    log4j.appender.kafkaAppender.DatePattern='.'yyyy-MM-dd-HH
+    log4j.appender.kafkaAppender.File=${kafka.logs.dir}/server.log
+    log4j.appender.kafkaAppender.layout=org.apache.log4j.PatternLayout
+    log4j.appender.kafkaAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+This way one can controll everything: the level of output messages (ERROR, INFO, DEBUG), the format, the output files, etc.
