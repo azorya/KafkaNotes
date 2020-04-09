@@ -9,7 +9,7 @@ Our steps are :
 
 1. [Prepare all the directories and links](#bin_flink_one)
 2. [Configure Zookeeper](./zookeeper_settings.md)
-3. [Configure Kafka]()
+3. [Configure Kafka](./kafka_settings.md)
 4. [Configure Schema Registry]()
 
 
