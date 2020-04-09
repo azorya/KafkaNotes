@@ -106,4 +106,5 @@ Please note that now we have a new zookeeper node _kafka-manager_ created (by CM
 
 Now we have our application running. To use it we have to start a web browser (firefox for example) and connenct to the port _9000_.
 
-    
+The _cmak_ is not without some minor glitches though. For example some of the changes you made is not immediately visible and one has to go "back and forth" on the links.
+
