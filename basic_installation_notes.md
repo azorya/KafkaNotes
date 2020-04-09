@@ -19,7 +19,7 @@ As was mentioned above we use manual installation. We extract our [package](#bin
     zconsult@kafkaqa3:~$ ls ~
     apps  bin  kafka  kafka_data  test
 
-In the _kafka_ directory habe have _current_ link pointing to our extracted package:
+In the _kafka_ directory the _current_ link points to our extracted package:
 
     zconsult@kafkaqa3:~$ ls -l kafka
     total 280828
