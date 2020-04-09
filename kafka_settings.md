@@ -5,7 +5,7 @@ We will confugure a three node kafka cluster. That is the smallest possible setu
 We have to:
 
 1.  [Configure a single node](#ks_flink_one)
-2.  [Propagate  this changes to other nodes](#ks_flink_two)
+2.  [Propagate this changes to other nodes](#ks_flink_two)
 3.  [Launch and test our cluster](#ks_flink_three)
 
 
