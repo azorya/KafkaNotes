@@ -17,7 +17,7 @@ As with zookeeper settings we have a link to this config file in the  _/opt_
     zconsult@kafkaqa1:/opt$ ls -l /opt/kafka/etc/kafka/server.properties 
     -rw-r--r-- 1 zconsult zconsult 8417 Apr  8 19:45 /opt/kafka/etc/kafka/server.properties
 
-To view the changes we use the **git command**:
+To view the changes we use the **git** command:
 
     diff --git a/kafka/server.properties b/kafka/server.properties
     index fc9ba00..dbd9378 100644
@@ -83,7 +83,8 @@ To view the changes we use the **git command**:
  
  We made a few changes:
  *  _broker.id_ is the unique id of the kafka node.
- *  _log.dirs_  is the location(s) where kafka stores the data. Please look at the last paragraph in our [basic installation](./basic_installation_notes.md)
+ *  _log.dirs_  is the location(s) where kafka stores the data. Look at the last paragraph in our [basic installation](./basic_installation_notes.md)
+ *  _auto.create.topics.enable_ was set to _false_. (_true_ is the default.) It prevents from accidental topic creation by misspelling the topic name.
 
     
     
