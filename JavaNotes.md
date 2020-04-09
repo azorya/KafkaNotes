@@ -1,4 +1,4 @@
-**Java Notes.**
+## Java Notes.
 
 To run Kafka and all the Kafka utils one needs Java. 
 One possible way to deal with this is to install Java as a standard package using your package management
