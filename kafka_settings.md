@@ -83,7 +83,7 @@ To view the changes we use the **git** command:
  
  We made a few changes:
  *  _broker.id_ is the unique id of the kafka node.
- *  _log.dirs_  is the location(s) where kafka stores the data. Look at the last paragraph in our [basic installation](./basic_installation_notes.md#bin_flink_two)
+ *  _log.dirs_  is the location(s) where kafka stores the data. Look [here](./basic_installation_notes.md#bin_flink_two) for more info.
  *  _auto.create.topics.enable_ was set to _false_. (_true_ is the default.) It prevents from accidental topic creation by misspelling the topic name.
 
     
