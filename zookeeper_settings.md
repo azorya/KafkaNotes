@@ -1,5 +1,5 @@
 
-**zookeeper configuration**
+## zookeeper configuration
 
 We will confugure and check three node _zookeeper ensemble_. That is the prefered way to use zookeeper with kafka cluster. The main differnce is that all the data a shared between all the members of the _ensemble_ making it possible to work with some of our nodes down. 
 
@@ -11,13 +11,13 @@ We have to:
 
 
 
-***zookeeper node changes*** <a name="zs_flink_one"/>
+### zookeeper node changes <a name="zs_flink_one"/>
 
 To configure a zookeper node we are going to: 
 *  [make the following changes](#zs_flink_one_one) in the zookeeper.properties file.
 *  [create a myid file](#zs_flink_one_two).
 
-****zookeeper.properties****
+#### zookeeper.properties
 
 In our case _zookeeper.properties_ file is visible through _/opt_
 
@@ -59,7 +59,7 @@ Let us examine our changes using **git diff** command: <a name="zs_flink_one_one
 We changed the _DataDir_ location from /tmp/zookeeper to the _/opt/kafka_data/zoo_, add  three lines describing our servers:
 _server.1=10.111.30.26:2888:3888_, and added a couple of more params.
 
-****myid file**** <a name="zs_flink_one_two"/>
+#### myid file <a name="zs_flink_one_two"/>
 
 Now we have to add myid file to the /opt/kafka_data/zoo directory. 
 
@@ -72,7 +72,7 @@ The content of this file is a single number (id of our zookeeper node).
     1
 
 
-***Propagate changes to all the nodes*** <a name="zs_flink_two"/> 
+#### Propagate changes to all the nodes <a name="zs_flink_two"/> 
 
 We have to make similar changes (or simply _scp_ them) to all our nodes. 
 Please note that the content of _myid_ file is unique for each node.
@@ -87,7 +87,7 @@ On the kafkaqa3:
     zconsult@kafkaqa3:~$ cat /opt/kafka_data/zoo/myid
     3
 
-***Launch and test*** <a name="zs_flink_three"/> 
+### Launch and test <a name="zs_flink_three"/> 
 
 There are three different ways to start kafka related server processes. 
 
