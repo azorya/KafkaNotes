@@ -85,6 +85,10 @@ To view the changes we use the **git** command:
  *  _broker.id_ is the unique id of the kafka node.
  *  _log.dirs_  is the location(s) where kafka stores the data. Look [here](./basic_installation_notes.md#bin_flink_two) for more info.
  *  _auto.create.topics.enable_ was set to _false_. (_true_ is the default.) It prevents from accidental topic creation by misspelling the topic name.
+ * _offsets.topic.replication.factor_ & _transaction.state.log.replication.factor_ are settings for the _replication_ of kafka internal(system) topics.
+ * _log.cleanup.policy=delete_ means that after kafka log file is exipred it must be deleted.
+ * _zookeeper.connect_ is a way our kafka node finds a _zookeeper enseble_. Please note that we use a zookeeper nodes we [created]() before.
+ 
 
     
     
