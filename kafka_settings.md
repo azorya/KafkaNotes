@@ -87,7 +87,7 @@ To view the changes we use the **git** command:
  *  _auto.create.topics.enable_ was set to _false_. (_true_ is the default.) It prevents from accidental topic creation by misspelling the topic name.
  * _offsets.topic.replication.factor_ & _transaction.state.log.replication.factor_ are settings for the _replication_ of kafka internal(system) topics.
  * _log.cleanup.policy=delete_ means that after kafka log file is exipred it must be deleted.
- * _zookeeper.connect_ is a way our kafka node finds a _zookeeper enseble_. Please note that we use a zookeeper nodes we [created](./zookeeper_node_for_kafka.md) before.
+ * _zookeeper.connect_ is a way our kafka node finds a _zookeeper enseble_. Please note that we use a zookeeper nodes we [created](./zookeeper_node_for_kafka.md#zs_flink_last) before.
  
 
     
