@@ -114,23 +114,7 @@ Do not forget that JAVA_HOME environment veriable must be set one way or another
 
         zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
         
-To launch a kafka server process on a node use _zookeeper-server-start_ command from the kafka _bin_ directory.
-
-    ### Launch and test <a name="zs_flink_three"/> 
-
-There are three different ways to start kafka related server processes. 
-
-* Run them from the command line.
-* Run them from the command line as _daemons_.
-* Run them as _systemd services_.
-
-The difference between first two options is that a _daemon_ will be running even if the terminal it was launched from is closed.
-
-Do not forget that JAVA_HOME environment veriable must be set one way or another.
-
-        zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
-        
-To launch a zookeeper process on a node use _kafka-server-start_ command from the kafka _bin_ directory.
+To launch a kafka process on a node use _kafka-server-start_ command from the kafka _bin_ directory.
 
     /opt/kafka/bin/kafka-server-start -daemon /opt/kafka/etc/kafka/server.properties
     
