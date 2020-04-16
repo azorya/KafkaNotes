@@ -1,7 +1,7 @@
 
 ## zookeeper configuration
 
-We will confugure and check three node _zookeeper ensemble_. That is the prefered way to use zookeeper with kafka cluster. The main differnce is that all the data a shared between all the members of the _ensemble_ making it possible to work with some of our nodes down. 
+We will confugure and test a three-node _zookeeper ensemble_. That is the prefered way to use zookeeper with kafka cluster. The main differnce is that all the data a shared between all the members of the _ensemble_ making it possible to work with some of our nodes down. 
 
 We have to:
 
@@ -118,9 +118,9 @@ To check for zookeeper log files (for example if something went wrong) check our
     -rw-rw-r-- 1 zconsult zconsult  1887 Apr  3 08:48 zookeeper-gc.log.0
     -rw-rw-r-- 1 zconsult zconsult 19099 Apr  7 11:11 zookeeper.out
 
-zookeeper writes to quite a few files but _zookeeper.out_ is a good place to start looking.
+zookeeper writes quite a few files but _zookeeper.out_ is a good place to start looking.
 
-Do not forget repeat your launch command on all the boxes.
+Do not forget to run the _zookeeper-server-start_ command on all the zookeeper boxes before starting kafka brokers.
 
-As a test let us [create a zookeeper node.](./zookeeper_node_for_kafka.md) 
+Follow the link for isntructions on how to [create a zookeeper node](./zookeeper_node_for_kafka.md) for kafka.
 

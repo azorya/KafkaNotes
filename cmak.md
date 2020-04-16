@@ -1,8 +1,8 @@
 ## CMAK (former KafkaManager) Notes.
 
-[CMAK](https://github.com/yahoo/CMAK) (former KafkaManager) is a useful tool to help with some kafka realted tasks like managing topics, browsing and monitoring. It is build and installed on the _kafkaqamini1_ box.
+[CMAK](https://github.com/yahoo/CMAK) (former KafkaManager) is a useful tool for many kafka-realted tasks such as managing topics, browsing, and monitoring. As of now, CMAK is built and installed on the _kafkaqamini1_ server.
 
-To get it "from scratch" our steps are:
+Setting CMAK up "from scratch" involves the following steps:
 
 1.  [get CMAK](#cmak_flink_one) 
 2.  [build it](#cmak_flink_two) 
@@ -21,7 +21,7 @@ To build it we must have java in our PATH.
 
     export PATH=$PATH:/opt/kafka_java/bin
 
-In our newly created _CMAK_ directory we have _sbt_ command.
+In our newly created _CMAK_ directory we have _sbt_ application.
 
     zconsult@kafkaqa3:~/stage/CMAK$ ls
     app        conf  LICENSE  public     sbt  target
@@ -31,7 +31,7 @@ Run it like this:
          
     ./sbt clean dist
 
-The building process takes some time. It downloads quite a bit in the ~/sbt directory. At the end we must have _cmak-3.0.0.4.zip_ file in the _target/universal_ directory.
+The building process takes some time. It downloads quite a lot into the ~/sbt directory, and we end up with the _cmak-3.0.0.4.zip_ file in the _target/universal_ directory.
 
     zconsult@kafkaqa3:~/stage/CMAK/target/universal$ ls
     cmak-3.0.0.4.zip  scripts
@@ -40,7 +40,7 @@ That archive file is what we want to deploy on the box where this app is going t
 
 ##### Install & Config <a name="cmak_flink_three"/>
 
-We must create a _zookeeper node_ [like we did in this exercise](./zookeeper_node_for_kafka.md) for the CMAK app
+We must create a _zookeeper node_ [like we did for kafka](./zookeeper_node_for_kafka.md) for the CMAK app
 
      zconsult@kafkaqa3:/opt$ /opt/kafka/bin/zookeeper-shell localhost:2181 
      Connecting to localhost:2181
@@ -57,7 +57,7 @@ We must create a _zookeeper node_ [like we did in this exercise](./zookeeper_nod
     create /apps/cmak data
     Created /apps/cmak
 
-To config we edit _application.conf_ file. (we must make it on the box were we would like to run it).
+To configure, we edit the _application.conf_ file. (we must put it on the box were we plan to run it).
      
     zconsult@kafkaqa3:~/test/cmak-3.0.0.4/conf$ ls
     application.conf  consumer.properties  logback.xml  logger.xml  routes
@@ -77,7 +77,7 @@ Our changes are the following (just one line):
     +cmak.zkhosts="kafkaqa2:2181/apps/cmak"
     cmak.zkhosts=${?ZK_HOSTS}
 
-We are pointing out to the zookeeper node (_kafkaqa2:2181/apps/cmak_) we created on the previous step.
+We are pointing CMAK to the zookeeper node (_kafkaqa2:2181/apps/cmak_) we created on the previous step.
 
 #### Run & test <a name="cmak_flink_fore"/>
 
@@ -101,10 +101,9 @@ We can check that this app is using proper node like this:
     ls /apps/cmak
     [kafka-manager]
 
-Please note that now we have a new zookeeper node _kafka-manager_ created (by CMAK application) under our previously created _cmak_.
-
+Now we have a new zookeeper node _kafka-manager_ created (by CMAK application) under our previously created _cmak_.
 
 Now we have our application running. To use it we have to start a web browser (firefox for example) and connenct to the port _9000_.
 
-The _cmak_ is not without some minor glitches though. For example some of the changes you made is not immediately visible and one has to go "back and forth" on the links. The previous version had some problems with _consumer groups_. It "remembered" them long after they were gone. Consider this tool as a helper only, the command line tools provide more reliable information.
+The _cmak_ is not without some minor glitches though. For example some of the changes made are not immediately visible and one has to go "back and forth" on the links. The previous version had some problems with _consumer groups_. It "remembered" them long after they were gone. Consider this tool as a helper only, the command line tools provide more reliable information.
 

@@ -1,10 +1,10 @@
 ## Creating a Zookeeper node example.
 
-Do not forget that JAVA_HOME environment veriable must be set.
+Do not forget that JAVA_HOME environment variable must be set.
 
         zconsult@kafkaqa1:~$ export JAVA_HOME=~/apps/java
 
-To create a zookeeper node (for example for kafka) we do the following:
+To create a zookeeper node (i.e. for kafka) we do the following:
 
 1.  [Connect to the zookeeper.](#zs_flink_one)
 2.  [Create a node.](#zs_flink_two)

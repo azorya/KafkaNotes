@@ -1,16 +1,19 @@
  ## Schema-Registry-GUI
  
- We use the following [schema-registry-ui](https://github.com/lensesio/schema-registry-ui).
- It gives a nice alternative to the plain _curl_ command.
+On a basic level the regirstry is managed via a set of plain _curl_ commands.  In this project we install the following [schema-registry-ui](https://github.com/lensesio/schema-registry-ui) as user-friendly alternative.
  
  The built version is installed  on the _kafkaqamini1_ box in the _/home/zconsult/stage/schema-registry-ui_ directory.
  Please note that currently it could be used only from the local box.
  
  To use it one needs [npm](https://www.sitepoint.com/beginners-guide-node-package-manager/) installed.
+ On the _kafkaqamini1_ we have it in the ~./apps/node_js directory. 
+ 
+    zconsult@kafkaqamini1:~/apps/node_js/bin$ ls
+    node  npm  npx
  
  To build it "from scratch" please have a look at the [README](https://github.com/lensesio/schema-registry-ui/blob/master/README.md) file of that project.
  
-Please note that after _"npm install"_ command from the README above one has to edit env.js file.
+Note that after _"npm install"_ command from the README above one has to edit env.js file.
 
 Our changes are: 
 
@@ -32,5 +35,9 @@ Our changes are:
      NAME: "dev",
 
 We changed only two lines: the path to our schema_registry service (which currently running on the _kafkaqa1_ box) and _readonlyMode_ to false.
+
+To start it 
+1. cd _zconsult@kafkaqamini1:~/stage/schema-registry-ui_
+2. run _npm start_
 
 To use it **run a web browser on the same box** (firefox on the _kafkaqadmin1_ box) and go to the http://localhost:8080/
